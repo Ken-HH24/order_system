@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"></script>
+
+    <style>
+        .container-fluid {
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            height: 60px;
+        }
+
+        .btn-dark {
+            margin-left: auto;
+        }
+
+        .left-nav {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            border-right: solid 1px ghostwhite;
+            background-color: #F8F9FA;
+            padding: 30px;
+            width: 18%;
+        }
+
+        main {
+            flex-grow: 1;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: row;
+        }
+
+        ul {
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+            margin: 40px;
+        }
+
+        li > a {
+            color: black;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            margin: 8px;
+        }
+
+        .user {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .userpic {
+            width: 100px;
+            height: 100px;
+            margin: 20px;
+        }
+
+        .userpic > text {
+            text-align: center;
+        }
+
+        .choices {
+            flex-grow: 3;
+        }
+
+        .right-info {
+            flex-grow: 1;
+            box-sizing: border-box;
+        }
+
+        .right-info > header {
+            font: 50px bold;
+            margin: 20px 0 20px 50px;
+        }
+
+        .food-info {
+            flex-grow: 1;
+        }
+
+        .food-section {
+            margin: 50px 0 20px 100px;
+        }
+
+        .food-section > header {
+            font: 30px bold;
+            margin: 0 0 20px 0;
+        }
+
+        .custom-control-label {
+            font-size: 20px;
+        }
+
+        .custom-radio {
+            margin: 10px;
+        }
+
+        .info-group {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .customer-info {
+            padding: 0 150px 0 150px;
+            margin: 50px;
+            flex-grow: 1;
+        }
+
+        .signout {
+            color: white;
+        }
+
+        .error {
+            color: tomato;
+            margin-top: 5px;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+        <a class="navbar-brand">Database</a>
+        <button type="button" class="btn btn-dark"><a href="/logout" class="signout">sign out</a></button>
+    </nav>
+    <main>
+        <div class="left-nav">
+            <section class="user">
+                <img src="../static/userpic.png" alt="userpic" class="userpic">
+                <text>{{ user.username }}</text>
+            </section>
+            <section class="choices">
+                <ul>
+                    <li><img src="../static/home.png" alt="legue" class="icon"><a href="/index">主页信息</a></li>
+                    <li><img src="../static/order.png" alt="team" class="icon"><a href="/order">订餐服务</a></li>
+                    <li><img src="../static/personal.png" alt="member" class="icon"><a href="personal">个人中心</a></li>
+                </ul>
+            </section>
+        </div>
+        <div class="right-info">
+            <header>订餐</header>
+            <form action="/order" method="post">
+                <div class="info-group">
+                    <div class="food-info">
+                        {% for foods in foodlist %}
+                            <section class="food-section">
+                                <header>{{ foods[0].type }}</header>
+                                {% for food in foods %}
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="{{ food.foodid }}" name="{{ food.type }}"
+                                               class="custom-control-input" value="{{ food.foodid }}">
+                                        <label class="custom-control-label"
+                                               for="{{ food.foodid }}">{{ food.foodname }} {{ food.price }}</label>
+                                    </div>
+                                {% endfor %}
+                            </section>
+                        {% endfor %}
+                    </div>
+                    <div class="customer-info">
+                        <div class="form-group">
+                            <label for="name">姓名</label>
+                            <input type="text" class="form-control" id="name" name="receiver">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">手机</label>
+                            <input type="text" class="form-control" id="phone" name="receiver_phone">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="address">详细地址</label>
+                                <input type="text" class="form-control" id="address" name="address">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg">下单</button>
+                        {% for message in get_flashed_messages() %}
+                            <div class="error">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </main>
+</div>
+
+<script>
+
+</script>
+
+</body>
+</html>

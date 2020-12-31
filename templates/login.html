@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"></script>
+
+    <style>
+        .page {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #F5F5F5;
+        }
+
+        .main {
+            width: 600px;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon {
+            width: 100px;
+            height: 80px;
+            margin: 30px;
+        }
+
+        header {
+            margin: 0 0 20px 0;
+            font: 40px bold;
+        }
+
+        form {
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        button {
+            width: 100px;
+            margin: 20px;
+        }
+
+        .error {
+            color: tomato;
+        }
+    </style>
+
+</head>
+<body>
+<div class="page">
+    <div class="main">
+        <img src="../static/hamburger.png" alt="hamburger" class="icon">
+        <header>Please sign in</header>
+        <form action="/login" method="post">
+            <input class="form-control" type="text" placeholder="enter your username" name="username">
+            <input class="form-control" type="password" placeholder="enter your password" name="password">
+            <a href="/register">立即注册</a>
+            <button type="submit" class="btn btn-primary">登录</button>
+            {% if login_error %}
+                <div class="error">用户名或密码错误</div>
+            {% endif %}
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>
